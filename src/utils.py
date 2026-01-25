@@ -139,7 +139,7 @@ def cartesianToPolar(fft2):
     
 def radonTransform(block):
     n = block.shape[0]
-    fft2 = np.fft.fft2(block) #on commence par la fft2d
+    fft2 = np.fft.fftshift(np.fft.fft2(block)) #on commence par la fft2d
 
     fft_polar = cartesianToPolar(fft2)
 
@@ -186,10 +186,10 @@ def polarToCartesian(fft_polar):
                 fft2[fy, fx] += fft_polar[l_id, m]
                 count[fy, fx] += 1
 
-        mask = count > 0
-        fft2[mask] /= count[mask]
+    mask = count > 0
+    fft2[mask] /= count[mask]
         
-        return fft2
+    return fft2
 
 
 def inv_radonTransfrom(radon):
@@ -200,7 +200,7 @@ def inv_radonTransfrom(radon):
 
     fft2 = polarToCartesian(fft_polar)
 
-    return np.real(np.fft.ifft2(fft2))
+    return np.real(np.fft.ifft2(np.fft.ifftshift(fft2)))
 
 def ondelette(radon_block, wavelet='db1', level=None):
     n_angles = radon_block.shape[0]
@@ -292,11 +292,11 @@ if __name__ == "__main__":
 
     J = 5
     B = 16
-    # c, curvelet = curveletTransform(image, J, B)
-    # inv = inv_curveletTransform(c, curvelet, J, B, image.shape)
+    c, curvelet = curveletTransform(image, J, B)
+    inv = inv_curveletTransform(c, curvelet, J, B, image.shape)
 
-    radon = radonTransform(image)
-    inv = inv_radonTransfrom(radon)
+    # radon = radonTransform(image)
+    # inv = inv_radonTransfrom(radon)
 
 
 
