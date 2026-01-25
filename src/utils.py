@@ -3,12 +3,11 @@ from skimage import io
 import matplotlib.pyplot as plt
 import numpy as np
 import pywt
-from skimage.transform import radon, iradon
 from scipy.signal import convolve2d
 
 def affichage(image, noisyImage, filteredImage):
-    # psnrNoisy = psnr(image, noisyImage)
-    # psnrFiltered = psnr(image, filteredImage)
+    psnrNoisy = psnr(image, noisyImage)
+    psnrFiltered = psnr(image, filteredImage)
     plt.figure(figsize=(18, 6))
 
     plt.subplot(1, 3, 1)
@@ -18,12 +17,12 @@ def affichage(image, noisyImage, filteredImage):
 
     plt.subplot(1, 3, 2)
     plt.imshow(noisyImage, cmap='gray')  
-    # plt.title(f'Image with noise\nPSNR = {psnrNoisy} dB')    
+    plt.title(f'Image with noise\nPSNR = {psnrNoisy} dB')    
     plt.axis('off')
 
     plt.subplot(1, 3, 3)
     plt.imshow(filteredImage, cmap='gray')
-    # plt.title(f'Filtered image\nPSNR = {psnrFiltered} dB')
+    plt.title(f'Filtered image\nPSNR = {psnrFiltered} dB')
     plt.axis('off')
 
     plt.show()
@@ -289,8 +288,18 @@ def psnr(image1, image2, pmax=255.0):
 if __name__ == "__main__":
     nameFile = sys.argv[1]
     image = io.imread(nameFile)
-    noisy_image = noise(image, 1)
+    noisy_image = noise(image, 20)
+
+    J = 5
+    B = 16
+    # c, curvelet = curveletTransform(image, J, B)
+    # inv = inv_curveletTransform(c, curvelet, J, B, image.shape)
+
+    radon = radonTransform(image)
+    inv = inv_radonTransfrom(radon)
 
 
-    affichage(image, noisy_image, image)
+
+
+    affichage(image, noisy_image, inv)
 

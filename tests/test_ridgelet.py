@@ -3,6 +3,7 @@ import numpy.random as rd
 
 def test_ridgelet():
     tab = rd.rand(256,256)
+    tab *= 255
     ridgelet = ridgeletTransform(tab)
     inv = inv_ridgeletTransform(ridgelet)
     assert psnr(tab, inv) > 50

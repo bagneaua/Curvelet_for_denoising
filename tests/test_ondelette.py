@@ -3,6 +3,7 @@ import numpy.random as rd
 
 def test_radon():
     tab = rd.rand(2*256,256)
+    tab *= 255
     ond = ondelette(tab)
     inv = inv_ondelette(ond)
     assert psnr(tab, inv) > 300
