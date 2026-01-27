@@ -6,5 +6,5 @@ def test_radon():
     tab *= 255
     radon = radonTransform(tab)
     inv = inv_radonTransfrom(radon)
-    assert psnr(tab, inv) > 10
-    assert psnr(tab, inv) < 20
+    assert psnr(tab, inv) > 30
+    assert psnr(tab, inv) < 50

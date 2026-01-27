@@ -6,7 +6,7 @@ import pywt
 from scipy.signal import convolve2d
 
 def affichage(image, noisyImage, filteredImage):
-    psnrNoisy = psnr(image, noisyImage)
+    # psnrNoisy = psnr(image, noisyImage)
     psnrFiltered = psnr(image, filteredImage)
     plt.figure(figsize=(18, 6))
 
@@ -17,7 +17,7 @@ def affichage(image, noisyImage, filteredImage):
 
     plt.subplot(1, 3, 2)
     plt.imshow(noisyImage, cmap='gray')  
-    plt.title(f'Image with noise\nPSNR = {psnrNoisy} dB')    
+    # plt.title(f'Image with noise\nPSNR = {psnrNoisy} dB')    
     plt.axis('off')
 
     plt.subplot(1, 3, 3)
@@ -104,7 +104,7 @@ def inv_partitioning(blocks, pos, image_shape, b):
 def cartesianToPolar(fft2):
     n = fft2.shape[0]
     cx, cy = n//2, n//2
-    fft_polar = np.zeros((2*n, n), dtype=complex) # stock res complex car fourier
+    fft_polar = np.zeros((2*n, n), dtype=complex)
 
     for l_id in range(2*n):
         #On tire les points d'où parte les rayons
@@ -114,7 +114,7 @@ def cartesianToPolar(fft2):
             px, py = -n//2 + l_id, n//2
         else:
             #bord droit à bord gauche 
-            px, py = n//2, n//2 -1 - l_id
+            px, py = n//2, n + n//2 - l_id
 
         for m in range(n):
             inter = m - n//2
@@ -165,7 +165,7 @@ def polarToCartesian(fft_polar):
             px, py = -n//2 + l_id, n//2
         else:
             #bord droit à bord gauche 
-            px, py = n//2, n//2 -1 - l_id
+            px, py = n//2, n + n//2 - l_id
 
         for m in range(n):
             inter = m - n//2
@@ -292,14 +292,28 @@ if __name__ == "__main__":
 
     J = 5
     B = 16
-    c, curvelet = curveletTransform(image, J, B)
-    inv = inv_curveletTransform(c, curvelet, J, B, image.shape)
+    # c, curvelet = curveletTransform(image, J, B)
+    # inv = inv_curveletTransform(c, curvelet, J, B, image.shape)
 
     # radon = radonTransform(image)
     # inv = inv_radonTransfrom(radon)
 
+    # polar = cartesianToPolar(image)
+    # inv = polarToCartesian(polar)
+
+    # ridgelet = ridgeletTransform(image)
+    # inv = inv_ridgeletTransform(ridgelet)
+
+    # ond = ondelette(image)
+    # inv = inv_ondelette(ond)
+
+    # c, w = atrous_transform(image, J)
+    # inv = inv_atrous(c, w)
+
+    # part, pos = partitioning(image, B)
+    # inv = inv_partitioning(part, pos, image.shape, B)
 
 
 
-    affichage(image, noisy_image, inv)
+    # affichage(image, noisy_image, inv)
 
