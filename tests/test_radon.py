@@ -1,5 +1,7 @@
-from src.utils import radonTransform, inv_radonTransfrom, psnr
 import numpy.random as rd
+
+from src.radon import radonTransform, inv_radonTransfrom
+from src.utils import psnr
 
 def test_radon():
     tab = rd.rand(256,256)

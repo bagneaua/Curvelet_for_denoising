@@ -1,5 +1,7 @@
-from src.utils import curveletTransform, inv_curveletTransform, psnr
 import numpy.random as rd
+
+from src.utils import psnr
+from src.curvelet import curveletTransform, inv_curveletTransform 
 
 def test_curvelet():
     tab = rd.rand(32,32)

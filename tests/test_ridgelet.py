@@ -1,5 +1,7 @@
-from src.utils import ridgeletTransform, inv_ridgeletTransform, psnr
 import numpy.random as rd
+
+from src.ridgelet import ridgeletTransform, inv_ridgeletTransform
+from src.utils import psnr
 
 def test_ridgelet():
     tab = rd.rand(256,256)

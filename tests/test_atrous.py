@@ -1,6 +1,7 @@
-from src.utils import atrous_transform, inv_atrous, psnr
 import numpy.random as rd
 
+from src.atrous import atrous_transform, inv_atrous
+from src.utils import psnr
 
 def test_atrous():
     tab = rd.rand(256,256)

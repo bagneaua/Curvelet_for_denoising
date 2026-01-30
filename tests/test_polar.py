@@ -1,5 +1,7 @@
-from src.utils import cartesianToPolar, polarToCartesian, psnr
 import numpy.random as rd
+
+from src.radon import cartesianToPolar, polarToCartesian
+from src.utils import psnr
 
 def test_radon():
     tab = rd.rand(256,256)
