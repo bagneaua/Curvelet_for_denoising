@@ -22,7 +22,7 @@ def curveletTransfrom(noisyImage, J, Bmin):
 
         curvelet.append((ridgeletJ, posJ))
 
-        if j % 2 == 1:
+        if j % 2 == 0:
             B *= 2
 
     return c, curvelet
@@ -41,7 +41,7 @@ def inv_curveletTransform(c, curvelet, J, Bmin, image_shape):
         
         w.append(inv_partitioning(blockJ, posJ, image_shape, B))
 
-        if j % 2 == 1:
+        if j % 2 == 0:
             B *= 2
     
     return inv_atrous(c, w)

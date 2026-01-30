@@ -11,8 +11,7 @@ def ondeletteTransform(radon_block, wavelet='db1', level=None):
     ridgelet_coeffs = []
 
     for i in range(n_angles):
-        line = radon_block[i, :]
-        coeffs = pywt.wavedec(line, wavelet=wavelet, level=level)
+        coeffs = pywt.wavedec(radon_block[i], wavelet=wavelet, level=level)
         ridgelet_coeffs.append(coeffs)
 
     return ridgelet_coeffs
