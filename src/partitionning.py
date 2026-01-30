@@ -26,7 +26,7 @@ def fenetre_cos2_2d(b):
 
 def inv_partitioning(blocks, pos, image_shape, b):
     '''on multiplie la fenètre des cos par le block beaucoup plus rapide que de séquencer 
-    pour chaque pixel et même principe que l'article'''
+    pour chaque pixel (lenteur python vs array numpy c++) et même principe que l'article'''
     img = np.zeros(image_shape)
     poids = np.zeros(image_shape)
 

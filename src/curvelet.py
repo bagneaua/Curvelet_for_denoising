@@ -1,59 +1,50 @@
 import sys
 from skimage import io
+import numpy as np
 
 from .utils import affichage, noise
 from .partitionning import partitioning, inv_partitioning
 from .atrous import atrous_transform, inv_atrous
 from .ridgelet import ridgeletTransform, inv_ridgeletTransform
 
-
-def curveletTransform(noisyImage, J, Bmin):
-    c , w = atrous_transform(noisyImage, J)
+def curveletTransfrom(noisyImage, J, Bmin):
     B = Bmin
+
+    c , w = atrous_transform(noisyImage, J)
     curvelet = []
 
     for j in range(J):
-        ridgelet_scaleJ = []
-        pos_scaleJ = []
+        ridgeletJ = []
+        blockScaleJ , posJ = partitioning(w[j], B)
 
-        blocks, pos = partitioning(w[j], B)
-        ridgelet_blocks = []
+        for block in blockScaleJ:
+            ridgeletJ.append(ridgeletTransform(block))
 
-        for block in blocks:
-            ridgelet_on_block = ridgeletTransform(block)
-            ridgelet_blocks.append(ridgelet_on_block)
-
-        ridgelet_scaleJ.append(ridgelet_blocks)
-        pos_scaleJ.append(pos)  # stocke les positions du bloc
-
-        curvelet.append((ridgelet_scaleJ, pos_scaleJ))
+        curvelet.append((ridgeletJ, posJ))
 
         if j % 2 == 1:
             B *= 2
 
-    return c, curvelet  # renvoyer aussi l'approximation grossière
+    return c, curvelet
 
 def inv_curveletTransform(c, curvelet, J, Bmin, image_shape):
     B = Bmin
+    w = []
 
     for j in range(J):
-        ridgelet_scaleJ, pos_scaleJ = curvelet[j]
-        w_scaleJ = []
+        ridgeletJ = curvelet[j][0] #par soucis de claireté du code 
+        posJ = curvelet[j][1]
+        blockJ = []
 
-        for ridgelet_blocks, pos in zip(ridgelet_scaleJ, pos_scaleJ):
-            # Inverse Ridgelet sur chaque bloc
-            blocks_rec = [inv_ridgeletTransform(r) for r in ridgelet_blocks]
-
-            # Recoller les blocs avec fenêtre cosinus
-            wj = inv_partitioning(blocks_rec, pos, image_shape, B)
-            w_scaleJ.append(wj)
+        for ridgelet in ridgeletJ:
+            blockJ.append(inv_ridgeletTransform(ridgelet))
+        
+        w.append(inv_partitioning(blockJ, posJ, image_shape, B))
 
         if j % 2 == 1:
             B *= 2
-
-    # Inverse Atrous pour reconstruire l'image finale
-    return inv_atrous(c, w_scaleJ)
-
+    
+    return inv_atrous(c, w)
 
 if __name__ == "__main__":
     nameFile = sys.argv[1]
@@ -63,7 +54,7 @@ if __name__ == "__main__":
     J = 5
     B = 16
 
-    c, curvelet = curveletTransform(image, J, B)
+    c, curvelet = curveletTransfrom(image, J, B)
     inv = inv_curveletTransform(c, curvelet, J, B, image.shape)
 
     affichage(image, noisy_image, inv)
