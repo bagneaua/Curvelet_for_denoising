@@ -48,7 +48,7 @@ def radonTransform(block):
 
     radon = np.zeros_like(fft_polar, dtype=float)
     for l_id in range(2 * n):
-        radon[l_id, :] = np.real(np.fft.ifft(fft_polar[l_id, :]))
+        radon[l_id] = np.real(np.fft.ifft(fft_polar[l_id]))
 
     return radon
 
@@ -99,7 +99,7 @@ def inv_radonTransfrom(radon):
     n = radon.shape[1]
     fft_polar = np.zeros((2 *n,n), dtype=complex)
     for theta_idx in range(2 *n):
-        fft_polar[theta_idx, :] = np.fft.fft(radon[theta_idx, :])
+        fft_polar[theta_idx] = np.fft.fft(radon[theta_idx])
 
     fft2 = polarToCartesian(fft_polar)
 
