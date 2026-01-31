@@ -54,7 +54,7 @@ def filter(noisy_image, Bmin, J):
 
         B = 2**((j+1)//2)*Bmin
         k = 4 if j == 0 else 3
-        value = sigma[B] * k * 4
+        value = sigma[B] * k * 4.2
 
         for b_id in range(len(ridgeletJ)):
             for r_id in range(len(ridgeletJ[b_id])):

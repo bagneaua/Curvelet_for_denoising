@@ -21,6 +21,19 @@ def monteCarlo(N, M, K):
         means.append(np.mean(rid_means))
     
     return np.sqrt(np.mean(means))
+
+def monteCarloAngle(N, M, K):
+    noisy_ridgelet = generate_noisy(N, M, K)
+    liste_sigma = np.zeros(2*N)
+
+    for rid in noisy_ridgelet:
+        for l_id in range(len(rid)): #on parcourt les angles
+            print(np.concatenate(rid[l_id])**2)
+            liste_sigma[l_id] += np.mean(np.concatenate(rid[l_id])**2)
+    
+    return np.sqrt(liste_sigma/K)
+
+
     
 
 def writeEstimated(N, estimate):
@@ -34,7 +47,10 @@ if __name__ == "__main__":
     M = int(sys.argv[2])
     K = int(sys.argv[3])
 
-    estimate = monteCarlo(N, N, K)
+    # estimate = monteCarlo(N, N, K)
 
-    writeEstimated(N, estimate)
+    # writeEstimated(N, estimate)
+    # print(estimate)
+
+    estimate = monteCarloAngle(N, N, K)
     print(estimate)
