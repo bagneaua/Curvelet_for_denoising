@@ -56,4 +56,4 @@ if __name__ == "__main__":
     c, curvelet = curveletTransform(image, J, B)
     inv = inv_curveletTransform(c, curvelet, J, B, image.shape)
 
-    affichage2(image, inv)
+    affichage2(image, inv, "curvelet")
