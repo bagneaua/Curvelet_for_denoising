@@ -3,7 +3,7 @@ import pywt
 
 from .utils import affichage, noise
 from .monteCarlo import monteCarlo, writeEstimated
-from .curvelet import curveletTransfrom, inv_curveletTransform
+from .curvelet import curveletTransform, inv_curveletTransform
 
 def check_Bvalue(Bmin, J):
     list_B = []
@@ -44,7 +44,7 @@ def filter(noisy_image, Bmin, J):
     sigma = check_Bvalue(Bmin, J)
 
     print("Applying curvelet transform")
-    c, curvelet = curveletTransfrom(noisy_image, J, Bmin)
+    c, curvelet = curveletTransform(noisy_image, J, Bmin)
 
 
     print("Applying hard tresholding")

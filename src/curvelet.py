@@ -7,7 +7,7 @@ from .partitionning import partitioning, inv_partitioning
 from .atrous import atrous_transform, inv_atrous
 from .ridgelet import ridgeletTransform, inv_ridgeletTransform
 
-def curveletTransfrom(noisyImage, J, Bmin):
+def curveletTransform(noisyImage, J, Bmin):
     B = Bmin
 
     c , w = atrous_transform(noisyImage, J)
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     J = 5
     B = 16
 
-    c, curvelet = curveletTransfrom(image, J, B)
+    c, curvelet = curveletTransform(image, J, B)
     inv = inv_curveletTransform(c, curvelet, J, B, image.shape)
 
     affichage(image, noisy_image, inv)
