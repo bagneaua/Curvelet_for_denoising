@@ -42,7 +42,6 @@ def inv_partitioning(blocks, pos, image_shape, b):
 if __name__ == "__main__":
     nameFile = sys.argv[1]
     image = io.imread(nameFile)
-    noisy_image = noise(image, 20)
 
     J = 5
     B = 16
