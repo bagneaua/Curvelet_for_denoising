@@ -23,6 +23,9 @@ def affichage(image, noisyImage, filteredImage):
 
     plt.show()
 
+def mse(image1, image2):
+    return np.linalg.norm(image1-image2, 2)
+
 def noise(image, sigma):
     noisyImage = image + sigma * np.random.randn(*image.shape)
     return noisyImage
