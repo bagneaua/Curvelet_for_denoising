@@ -23,4 +23,4 @@ if __name__ == "__main__":
     ond = ridgeletTransform(image)
     inv = inv_ridgeletTransform(ond)
 
-    affichage2(image, inv)
+    affichage2(image, inv, string="Ridgelet")

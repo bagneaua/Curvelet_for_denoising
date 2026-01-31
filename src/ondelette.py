@@ -35,4 +35,4 @@ if __name__ == "__main__":
     ond = ondeletteTransform(image)
     inv = inv_ondeletteTransform(ond)
 
-    affichage2(image, inv)
+    affichage2(image, inv, "ondelette")

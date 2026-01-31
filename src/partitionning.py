@@ -49,4 +49,4 @@ if __name__ == "__main__":
     part, pos = partitioning(image, B)
     inv = inv_partitioning(part, pos, image.shape, B)
 
-    affichage2(image, inv)
+    affichage2(image, inv, string="Partionning")

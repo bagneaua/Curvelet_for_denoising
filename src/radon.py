@@ -116,4 +116,4 @@ if __name__ == "__main__":
     radon = radonTransform(image)
     inv = inv_radonTransfrom(radon)
 
-    affichage2(image, inv)
+    affichage2(image, inv, string="Radon")
