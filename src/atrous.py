@@ -50,4 +50,4 @@ if __name__ == "__main__":
     c, w = atrous_transform(image, J)
     inv = inv_atrous(c, w)
 
-    affichage2(image, inv, string="A_trous")
+    affichage2(image, inv, string="Atrous")
