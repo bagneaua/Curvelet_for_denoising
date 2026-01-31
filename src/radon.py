@@ -2,7 +2,7 @@ import sys
 from skimage import io
 import numpy as np
 
-from .utils import affichage, noise
+from .utils import affichage2
 
 def cartesianToPolar(fft2):
     n = fft2.shape[0]
@@ -109,7 +109,6 @@ def inv_radonTransfrom(radon):
 if __name__ == "__main__":
     nameFile = sys.argv[1]
     image = io.imread(nameFile)
-    noisy_image = noise(image, 20)
 
     J = 5
     B = 16
@@ -117,4 +116,4 @@ if __name__ == "__main__":
     radon = radonTransform(image)
     inv = inv_radonTransfrom(radon)
 
-    affichage(image, noisy_image, inv)
+    affichage2(image, inv)

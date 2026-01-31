@@ -38,3 +38,18 @@ def psnr(image1, image2, pmax=255.0):
     return 10*np.log10(pmax**2/sum)
 
 
+def affichage2(image1, image2, string="Transform"):
+    mse_images = mse(image1, image2)
+    plt.figure(figsize=(12, 6))
+
+    plt.subplot(1, 2, 1)
+    plt.imshow(image1, cmap='gray')
+    plt.title('Original Image')
+    plt.axis('off')
+
+    plt.subplot(1, 2, 2)
+    plt.imshow(image2, cmap='gray')
+    plt.title(f'inv{string}({string}(Image))\nMSE={mse_images:.5f}')
+    plt.axis('off')
+
+    plt.show()

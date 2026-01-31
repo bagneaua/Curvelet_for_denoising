@@ -3,7 +3,7 @@ from skimage import io
 import numpy as np
 import pywt
 
-from .utils import affichage, noise
+from .utils import affichage2
 
 
 def ondeletteTransform(radon_block, wavelet='db1', level=None):
@@ -28,7 +28,6 @@ def inv_ondeletteTransform(ridgelet_coeffs, wavelet='db1'):
 if __name__ == "__main__":
     nameFile = sys.argv[1]
     image = io.imread(nameFile)
-    noisy_image = noise(image, 20)
 
     J = 5
     B = 16
@@ -36,4 +35,4 @@ if __name__ == "__main__":
     ond = ondeletteTransform(image)
     inv = inv_ondeletteTransform(ond)
 
-    affichage(image, noisy_image, inv)
+    affichage2(image, inv)

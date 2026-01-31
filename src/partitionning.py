@@ -2,7 +2,7 @@ import sys
 from skimage import io
 import numpy as np
 
-from .utils import affichage, noise
+from .utils import affichage2
 
 def partitioning(noisyImage, b):
     stride = b // 2
@@ -50,4 +50,4 @@ if __name__ == "__main__":
     part, pos = partitioning(image, B)
     inv = inv_partitioning(part, pos, image.shape, B)
 
-    affichage(image, noisy_image, inv)
+    affichage2(image, inv)

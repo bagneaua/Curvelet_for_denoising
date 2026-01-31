@@ -2,7 +2,7 @@ import sys
 from skimage import io
 import numpy as np
 
-from .utils import affichage, noise
+from .utils import affichage2
 from .partitionning import partitioning, inv_partitioning
 from .atrous import atrous_transform, inv_atrous
 from .ridgelet import ridgeletTransform, inv_ridgeletTransform
@@ -49,7 +49,6 @@ def inv_curveletTransform(c, curvelet, J, Bmin, image_shape):
 if __name__ == "__main__":
     nameFile = sys.argv[1]
     image = io.imread(nameFile)
-    noisy_image = noise(image, 20)
 
     J = 5
     B = 16
@@ -57,4 +56,4 @@ if __name__ == "__main__":
     c, curvelet = curveletTransform(image, J, B)
     inv = inv_curveletTransform(c, curvelet, J, B, image.shape)
 
-    affichage(image, noisy_image, inv)
+    affichage2(image, inv)

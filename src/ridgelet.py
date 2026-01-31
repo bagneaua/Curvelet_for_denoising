@@ -1,7 +1,7 @@
 import sys
 from skimage import io
 
-from .utils import affichage, noise
+from .utils import affichage2
 from .radon import radonTransform, inv_radonTransfrom
 from .ondelette import ondeletteTransform, inv_ondeletteTransform
 
@@ -16,7 +16,6 @@ def inv_ridgeletTransform(ridgelet):
 if __name__ == "__main__":
     nameFile = sys.argv[1]
     image = io.imread(nameFile)
-    noisy_image = noise(image, 20)
 
     J = 5
     B = 16
@@ -24,4 +23,4 @@ if __name__ == "__main__":
     ond = ridgeletTransform(image)
     inv = inv_ridgeletTransform(ond)
 
-    affichage(image, noisy_image, inv)
+    affichage2(image, inv)
