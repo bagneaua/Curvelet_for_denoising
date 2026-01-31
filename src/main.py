@@ -9,9 +9,6 @@ if __name__ == "__main__":
     image = io.imread(nameFile)
     noisy_image = noise(image, 20)
 
-    # image_2 = np.array([[i + k*8 for i in range(8)] for k in range(8)])
-    # other = io.imread("image/e256.png")
-
     J = 5
     B = 16
 
